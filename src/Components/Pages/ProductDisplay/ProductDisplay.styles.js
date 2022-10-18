@@ -16,6 +16,16 @@ export const ProductDetailsThumbnails = styled.div`
   }
 `;
 
+export const ProductDetailsThumbnail = styled.img`
+  cursor: thumbnail;
+  box-sizing: border-box;
+  border: 3px solid white;
+  
+  &.active {
+    border: 3px solid blue;
+  }
+`
+
 export const ProductDetails = styled.div`
   position: sticky;
   top: 1em;
