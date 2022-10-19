@@ -6,6 +6,7 @@ import Button from "../../Buttons";
 import { useLayoutEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { checkForCartItems } from "../../../Redux/cart";
+import { useEffect } from "react";
 
 // mock product data
 const mockProduct = {
@@ -30,21 +31,33 @@ export const ProductImage = (props) => (
 // product details e.g. title, description
 export const ProductDetails = (props) => { 
   
-  const [active, setActive] = useState(false);
   const dispatch = useDispatch();
 
-  const handleClick = () => {
-    alert('clicked');
-    localStorage.setItem('cart', JSON.stringify({
-      count: 1,
-      items: [
-        {
-          title: mockProduct.title,
-          price: mockProduct.price,
-          image: mockProduct.images[0]
-        }
-      ]
-    }));
+  useEffect(() => {
+    dispatch(checkForCartItems());
+  }, [dispatch])
+
+  const addToCart = () => {
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart){
+      console.log('yes it exists');
+      cart.items.push({title: 'new product'});
+      localStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+      console.log('no it doesn');
+      localStorage.setItem('cart', JSON.stringify({
+        count: 1,
+        items: [
+          {
+            title: mockProduct.title,
+            price: mockProduct.price,
+            image: mockProduct.images[0]
+          }
+        ]
+      }));
+    }
+    console.log('add to cart clicked');
+    
     dispatch(checkForCartItems());
   }
   
@@ -52,7 +65,7 @@ export const ProductDetails = (props) => {
     <styles.ProductDetails>
       <h2>{props.title}</h2>
       <h2>{props.price}</h2>
-      <p className={active ? 'active' : ''}>{props.description}</p>
+      <p>{props.description}</p>
       <styles.ProductDetailsThumbnails>
         {props.thumbNailImages.map((i, index) => (
           <styles.ProductDetailsThumbnail 
@@ -62,7 +75,7 @@ export const ProductDetails = (props) => {
       </styles.ProductDetailsThumbnails>
       <p>Check store availibility</p>
       <br />
-      <Button label="Add to Cart" click={() => handleClick()} width="full" />
+      <Button label="Add to Cart" click={() => addToCart()} width="full" />
     </styles.ProductDetails>
   )
 };

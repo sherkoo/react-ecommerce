@@ -10,9 +10,10 @@ import Cart from "./Components/Pages/Cart";
 import NotFound from "./Components/Pages/NotFound";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import { useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { checkForCartItems} from './Redux/cart';
 
+// app
 function App() {
 
   const dispatch = useDispatch();

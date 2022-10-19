@@ -15,8 +15,6 @@ const Header = (props) => {
     <styles.Header>
     <Container>
       <styles.HeaderMain>
-        <h1>{cartState.count}</h1>
-        <button onClick={() => dispatch(incrementCartCount())}>Click</button>
         <Link to="/"><h1>Logo</h1></Link>
         <styles.HeaderMainNav>
           <span>search</span>
