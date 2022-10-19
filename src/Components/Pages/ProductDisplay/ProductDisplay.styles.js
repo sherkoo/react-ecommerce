@@ -17,16 +17,22 @@ export const ProductDetailsThumbnails = styled.div`
 `;
 
 export const ProductDetailsThumbnail = styled.img`
-  cursor: thumbnail;
+  cursor: pointer;
   box-sizing: border-box;
   border: 3px solid white;
-  
+  transition: border .25s ease-in-out;
+
+  &:hover{
+    border-color: lightblue;
+  }
+
   &.active {
-    border: 3px solid blue;
+    border-color: blue;
   }
 `
 
 export const ProductDetails = styled.div`
   position: sticky;
+  position: -webkit-sticky;
   top: 1em;
 `;

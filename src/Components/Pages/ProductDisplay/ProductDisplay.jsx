@@ -4,8 +4,10 @@ import * as styles from "./ProductDisplay.styles";
 import Container from "../../Container";
 import Button from "../../Buttons";
 import { useLayoutEffect } from "react";
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { checkForCartItems } from "../../../Redux/cart";
 
+// mock product data
 const mockProduct = {
   title: "Product title",
   description:
@@ -29,6 +31,22 @@ export const ProductImage = (props) => (
 export const ProductDetails = (props) => { 
   
   const [active, setActive] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    alert('clicked');
+    localStorage.setItem('cart', JSON.stringify({
+      count: 1,
+      items: [
+        {
+          title: mockProduct.title,
+          price: mockProduct.price,
+          image: mockProduct.images[0]
+        }
+      ]
+    }));
+    dispatch(checkForCartItems());
+  }
   
   return (
     <styles.ProductDetails>
@@ -37,12 +55,14 @@ export const ProductDetails = (props) => {
       <p className={active ? 'active' : ''}>{props.description}</p>
       <styles.ProductDetailsThumbnails>
         {props.thumbNailImages.map((i, index) => (
-          <styles.ProductDetailsThumbnail className={props.currentSlideId === index ? 'active': ''} onClick={() => props.click(index)} src={i} alt="" />
+          <styles.ProductDetailsThumbnail 
+            className={props.currentSlideId === index ? 'active': ''} onClick={() => props.click(index)} src={i} alt=""
+          />
         ))}
       </styles.ProductDetailsThumbnails>
       <p>Check store availibility</p>
       <br />
-      <Button label="Add to Cart" width="full" />
+      <Button label="Add to Cart" click={() => handleClick()} width="full" />
     </styles.ProductDetails>
   )
 };
@@ -60,14 +80,16 @@ const ProductDisplay = (props) => {
     <Container>
       <styles.ProductDisplayGrid>
         <ProductImage image={mockProduct.images[current]} />
-        <ProductDetails 
-          title={mockProduct.title}
-          price={mockProduct.price}
-          description={mockProduct.description}
-          thumbNailImages={mockProduct.images}
-          currentSlideId={current}
-          click={(index) => handleThumbnailClick(index)}
-        />
+        <div>
+          <ProductDetails 
+            title={mockProduct.title}
+            price={mockProduct.price}
+            description={mockProduct.description}
+            thumbNailImages={mockProduct.images}
+            currentSlideId={current}
+            click={(index) => handleThumbnailClick(index)}
+          />
+        </div>
       </styles.ProductDisplayGrid>
     </Container>
   )
