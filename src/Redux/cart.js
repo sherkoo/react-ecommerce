@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
+// cart slice
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     count: 0,
     total: 0,
     items: [],
-    test: 123123
+    test: 123
   },
   reducers: {
     incrementCartCount: (state, action) => {
@@ -21,10 +21,20 @@ export const cartSlice = createSlice({
       console.log('check for items')
       if(cart){
         state.count = cart.items.length;
-        state.items = cart.items
+        state.items = cart.items;
+
+        let calculatedTotal = 1;
+
+        for (let i = 0; i < cart.items.length; i++) {
+            console.log('for loop')
+            calculatedTotal += cart.items[i].price;
+        }
+
+        state.total = calculatedTotal;
       } else {
         state.count = 0;
         state.items = [];
+        state.total = 0;
       }
     },
     emptyCart: (state, action) => {
@@ -42,10 +52,11 @@ export const cartSlice = createSlice({
       //   console.log('got to then');
       //   checkForCartItems();
       // })
-      
+
       localStorage.removeItem('cart');
       state.count = 0;
       state.items = [];
+      state.total = 0;
     }
   }
 });

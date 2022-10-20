@@ -13,7 +13,7 @@ const mockProduct = {
   title: "Product title",
   description:
     "lorem ipsumelorem ipsumelorem ipsumelorem ipsumelorem ipsumelorem ipsume",
-  price: "$45.59",
+  price: 45.59,
   images: [
     "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F91%2Ff7%2F91f789d0347ffed27ed6e3ff961b2cb03fd94437.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]",
     "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F87%2Fa7%2F87a7b33e88a6650d213201be6f7988764882de87.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]",
@@ -41,7 +41,7 @@ export const ProductDetails = (props) => {
     let cart = JSON.parse(localStorage.getItem('cart'));
     if (cart){
       console.log('yes it exists');
-      cart.items.push({title: 'new product'});
+      cart.items.push({title: 'new product', price: 12.12});
       localStorage.setItem('cart', JSON.stringify(cart));
     } else {
       console.log('no it doesn');

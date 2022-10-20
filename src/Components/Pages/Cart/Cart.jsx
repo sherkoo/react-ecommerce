@@ -1,15 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import PropTypes from 'prop-types';
-//import { Test } from './Cart.styles';
-import Container from '../../Container/Container';
-import { useSelector, useDispatch } from 'react-redux';
-import { getCartTotal, emptyCart } from '../../../Redux/cart';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import * as Style from "./Cart.styles";
+import Container from "../../Container/Container";
+import { useSelector, useDispatch } from "react-redux";
+import { getCartTotal, emptyCart } from "../../../Redux/cart";
 
 /**
  * Cart
  */
 const Cart = (props) => {
-
   const [cartItems, setCartItems] = useState([]);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -32,46 +31,47 @@ const Cart = (props) => {
   // }
 
   useEffect(() => {
-    var cart = JSON.parse(localStorage.getItem('cart'));
+    var cart = JSON.parse(localStorage.getItem("cart"));
 
-    if(cart){
-      setCartItems(cart.items)
-      dispatch(getCartTotal());
+    if (cart) {
+      setCartItems(cart.items);
+      // dispatch(getCartTotal());
       // getCartItems()
     }
-  },[dispatch]);
+  }, [dispatch]);
 
   const renderItemsInCart = () => {
-
-    if(cart.items.length > 0){
+    if (cart.items.length > 0) {
       return (
         <div>
           {cart.items.map((i, index) => (
-            <div>{i.title}</div>
+            <Style.CartItem>
+              <h3>{i.title}</h3>
+              <div>Qty: </div>
+              <div>${i.price}</div>
+            </Style.CartItem>
           ))}
         </div>
-      )
+      );
     } else {
-      return (
-        <div>cart is empty</div>
-      )
+      return <div>cart is empty</div>;
     }
-  }
+  };
 
   return (
-    <div className="CartWrapper">
     <Container>
-      <h1>Cart</h1>
-      {renderItemsInCart()}
-      <button onClick={() => dispatch(emptyCart())}>Empty cart</button>
-      <div>
-        <h3>Total</h3>
-        ${cart.total}
-        
-      </div>
+      <Style.CartContainer>
+        <div>
+          <h1>Cart</h1>
+          {renderItemsInCart()}
+          <button onClick={() => dispatch(emptyCart())}>Empty cart</button>
+        </div>
+        <Style.CartOrderSummary>
+          <h3>Total</h3>${cart.total}
+        </Style.CartOrderSummary>
+      </Style.CartContainer>
     </Container>
-  </div>
-  )
+  );
 };
 
 Cart.propTypes = {
