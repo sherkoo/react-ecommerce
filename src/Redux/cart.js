@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// cart slice
+/**
+ * Cart redux
+ */
 export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     count: 0,
     total: 0,
     items: [],
-    test: 123
+    test: 123,
   },
   reducers: {
     incrementCartCount: (state, action) => {
@@ -17,17 +19,17 @@ export const cartSlice = createSlice({
       state.total = state.test;
     },
     checkForCartItems: (state, action) => {
-      var cart = JSON.parse(localStorage.getItem('cart'));
-      console.log('check for items')
-      if(cart){
+      var cart = JSON.parse(localStorage.getItem("cart"));
+      console.log("check for items");
+      if (cart) {
         state.count = cart.items.length;
         state.items = cart.items;
 
         let calculatedTotal = 1;
 
         for (let i = 0; i < cart.items.length; i++) {
-            console.log('for loop')
-            calculatedTotal += cart.items[i].price;
+          console.log("for loop");
+          calculatedTotal += cart.items[i].price;
         }
 
         state.total = calculatedTotal;
@@ -38,7 +40,7 @@ export const cartSlice = createSlice({
       }
     },
     emptyCart: (state, action) => {
-      console.log('empty cart clicked');
+      console.log("empty cart clicked");
       // var cart = JSON.parse(localStorage.getItem('cart'));
 
       // const makeFunction = (n) => {
@@ -53,14 +55,19 @@ export const cartSlice = createSlice({
       //   checkForCartItems();
       // })
 
-      localStorage.removeItem('cart');
+      localStorage.removeItem("cart");
       state.count = 0;
       state.items = [];
       state.total = 0;
-    }
-  }
+    },
+  },
 });
 
-export const { incrementCartCount, emptyCart, getCartTotal, checkForCartItems } = cartSlice.actions;
+export const {
+  incrementCartCount,
+  emptyCart,
+  getCartTotal,
+  checkForCartItems,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

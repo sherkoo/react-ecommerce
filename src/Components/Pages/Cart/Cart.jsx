@@ -13,30 +13,11 @@ const Cart = (props) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  // const getCartItems = () => {
-  //   if(cartItems.length > 0){
-  //     return (
-  //       <div>
-  //         {cartItems.map((i,index) => (
-  //           <div>
-  //             {i.title}
-  //             {i.price}
-  //           </div>
-  //         ))}
-  //       </div>
-  //     )
-  //   } else {
-  //     return 'nothing in cart'
-  //   }
-  // }
-
   useEffect(() => {
     var cart = JSON.parse(localStorage.getItem("cart"));
 
     if (cart) {
       setCartItems(cart.items);
-      // dispatch(getCartTotal());
-      // getCartItems()
     }
   }, [dispatch]);
 

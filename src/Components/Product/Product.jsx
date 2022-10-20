@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import * as styles from "./Product.styles";
 import { Link } from "react-router-dom";
 
+/**
+ * Product components
+ */
 const ProductCard = (props) => (
   <styles.ProductCard>
     <Link to={props.link}>

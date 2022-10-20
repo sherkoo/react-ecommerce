@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import * as styles from "./Footer.styles";
 import Container from "../Container";
 
+/**
+ * Footer
+ */
 const Footer = (props) => (
   <styles.Footer>
     <Container>Footer</Container>

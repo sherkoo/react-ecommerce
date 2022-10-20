@@ -1,7 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import * as styles from './Filter.styles';
+import React from "react";
+import PropTypes from "prop-types";
+import * as styles from "./Filter.styles";
 
+/**
+ * Filter
+ */
 const Filter = (props) => (
   <styles.Filter>
     <styles.FilterSection>

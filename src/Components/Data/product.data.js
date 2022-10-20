@@ -1,3 +1,6 @@
+/**
+ * Data
+ */
 const data = [
   {
     image:
